@@ -10,23 +10,29 @@
  */
 class Solution {
 public:
+    bool exists(vector<int>&nums, int x){
+        int start = 0;
+        int end = nums.size()-1;
+        while(start <= end){
+            int mid = start + (end - start) / 2;
+            if(x == nums[mid]) return true;
+            else if (x > nums[mid]) start = mid + 1;
+            else end = mid - 1;
+        }
+        return false;
+    }
     ListNode* modifiedList(vector<int>& nums, ListNode* head) {
-        if (head == nullptr) return nullptr;
-        unordered_set<int> s(nums.begin() , nums.end());
-        while (head != nullptr && s.count(head->val)) {
-            head = head->next;
-        }
-        ListNode* curr = head;
-        while (curr != nullptr && curr->next != nullptr) {
-            if (s.count(curr->next->val)) {
-                ListNode* nodeToDelete = curr->next;
-                curr->next = curr->next->next;
-                delete nodeToDelete;
+        sort(nums.begin(),nums.end());
+        ListNode* ans = new ListNode(0);
+        ListNode* t = ans;
+        ListNode* temp = head;
+        while(temp){
+            if(!exists(nums,temp->val)){
+                t->next = new ListNode(temp->val);
+                t = t->next;
             }
-            else {
-                curr = curr->next;
-            }
+            temp = temp->next;
         }
-        return head;
+        return ans->next;
     }
 };
