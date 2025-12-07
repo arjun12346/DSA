@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
         int n = nums.size();
-        unordered_map<int, int> mp;
+        unordered_map<int, int> mp; // did'nt use two pointer bcz array is not sorted
         for (int i = 0; i < n; i++) {
             int need = target - nums[i];
             if (mp.count(need)) {
