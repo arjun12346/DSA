@@ -6,9 +6,9 @@ public:
             mp[nums[i]]++;
         }
         vector<int> result;
-        for (int i = 0; i < mp.size(); i++) {
-            if (mp[i] > 1) {
-                result.push_back(i);
+        for (auto it : mp) {
+            if (it.second > 1) {
+                result.push_back(it.first);
             }
         }
         return result;
